@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HDS.Data.Models
+namespace HDS.Domain.Models
 {
     public class Employee : Person
     {
