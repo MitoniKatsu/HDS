@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HDS.Migrations": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "HDS_ConnectionString": "Server=.\\SQLEXPRESS;Database=HDS;Trusted_Connection=true"
+      }
+    }
+  }
+}

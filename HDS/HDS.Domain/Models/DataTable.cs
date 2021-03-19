@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HDS.Domain.Models
 {
-    public class Customer : Person
+    public abstract class DataTable
     {
-        public int CustomerID { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
     }
 }
