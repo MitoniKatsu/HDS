@@ -24,5 +24,6 @@ namespace HDS.Domain.Models
         public StoreRole Position { get; set; }
         public ICollection<EntityAddress> Addresses { get; set; }
         public ICollection<ContactMethod> ContactMethods { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

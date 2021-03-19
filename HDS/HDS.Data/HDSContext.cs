@@ -31,6 +31,7 @@ namespace HDS.Data
         {
             base.OnModelCreating(builder);
 
+            // EntityAddress
             builder.Entity<Customer>()
                 .HasMany(o => o.Addresses)
                 .WithOne()
@@ -48,6 +49,136 @@ namespace HDS.Data
                 .WithOne()
                 .HasForeignKey(o => o.EntityID)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // ContactMethod
+            builder.Entity<Customer>()
+                .HasMany(o => o.ContactMethods)
+                .WithOne()
+                .HasForeignKey(o => o.EntityID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Employee>()
+                .HasMany(o => o.ContactMethods)
+                .WithOne()
+                .HasForeignKey(o => o.EntityID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Store>()
+                .HasMany(o => o.ContactMethods)
+                .WithOne()
+                .HasForeignKey(o => o.EntityID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            #region DataTable Defaults
+            // Address
+            builder.Entity<Address>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Address>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // AddressType
+            builder.Entity<AddressType>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<AddressType>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // ContactMethod
+            builder.Entity<ContactMethod>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<ContactMethod>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // ContactMethodType
+            builder.Entity<ContactMethodType>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<ContactMethodType>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Customer
+            builder.Entity<Customer>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Customer>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Employee
+            builder.Entity<Employee>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Employee>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // EntityAddress
+            builder.Entity<EntityAddress>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<EntityAddress>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Inventory
+            builder.Entity<Inventory>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Inventory>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Order
+            builder.Entity<Order>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Order>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // OrderDetail
+            builder.Entity<OrderDetail>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<OrderDetail>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Service
+            builder.Entity<Service>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Service>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // Store
+            builder.Entity<Store>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<Store>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // StoreRole
+            builder.Entity<StoreRole>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<StoreRole>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+
+            #endregion
+
+
         }
     }
 }
