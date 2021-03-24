@@ -26,7 +26,9 @@ namespace HDS.Domain.Models
         public decimal Cost { get; set; }
         [Required]
         public decimal Price { get; set; }
+        public int LocationID { get; set; }
 
+        public Store Location { get; set; }
         public ICollection<OrderDetail> ProductOrderDetails { get; set; }
 
     }

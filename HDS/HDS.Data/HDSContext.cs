@@ -70,6 +70,13 @@ namespace HDS.Data
                 .HasForeignKey(o => o.EntityID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // inventory
+            builder.Entity<Store>()
+                .HasMany(o => o.Inventory)
+                .WithOne(o => o.Location)
+                .HasForeignKey(o => o.LocationID)
+                .OnDelete(DeleteBehavior.Restrict);
+
             #region DataTable Defaults
             // Address
             builder.Entity<Address>()

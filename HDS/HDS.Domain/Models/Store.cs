@@ -18,5 +18,6 @@ namespace HDS.Domain.Models
         public ICollection<EntityAddress> Addresses { get; set; }
         public ICollection<ContactMethod> ContactMethods { get; set; }
         public ICollection<StoreRole> Positions { get; set; }
+        public ICollection<Inventory> Inventory { get; set; }
     }
 }
