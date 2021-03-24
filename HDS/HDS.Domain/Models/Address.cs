@@ -17,7 +17,7 @@ namespace HDS.Domain.Models
         [MaxLength(50)]
         [Required]
         public string City { get; set; }
-        [MaxLength(560)]
+        [MaxLength(50)]
         [Required]
         public string State { get; set; }
         [MaxLength(10)]

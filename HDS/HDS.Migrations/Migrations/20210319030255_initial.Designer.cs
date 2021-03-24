@@ -45,8 +45,8 @@ namespace HDS.Migrations.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasMaxLength(560)
-                        .HasColumnType("nvarchar(560)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("StreetAddress")
                         .IsRequired()
