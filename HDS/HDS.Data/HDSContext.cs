@@ -70,7 +70,7 @@ namespace HDS.Data
                 .HasForeignKey(o => o.EntityID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // inventory
+            // Inventory
             builder.Entity<Store>()
                 .HasMany(o => o.Inventory)
                 .WithOne(o => o.Location)
@@ -124,6 +124,14 @@ namespace HDS.Data
                 .HasDefaultValueSql("GETUTCDATE()");
 
             builder.Entity<Employee>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
+            // EmployeePosition
+            builder.Entity<EmployeePosition>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Entity<EmployeePosition>()
                 .Property(o => o.Updated)
                 .HasDefaultValueSql("GETUTCDATE()");
             // EntityAddress

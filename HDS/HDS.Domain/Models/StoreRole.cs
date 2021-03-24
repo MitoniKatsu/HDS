@@ -18,6 +18,6 @@ namespace HDS.Domain.Models
         public int StoreID { get; set; }
 
         public Store Store { get; set; }
-        public ICollection<Employee> Employees { get; set; }
+        public ICollection<EmployeePosition> EmployeePositions { get; set; }
     }
 }

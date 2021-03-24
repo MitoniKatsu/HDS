@@ -17,11 +17,8 @@ namespace HDS.Domain.Models
         [MaxLength(100)]
         [Required]
         public string LastName { get; set; }
-        [Required]
-        public int StoreRoleID { get; set; }
 
-
-        public StoreRole Position { get; set; }
+        public ICollection<EmployeePosition> EmployeePositions { get; set; }
         public ICollection<EntityAddress> Addresses { get; set; }
         public ICollection<ContactMethod> ContactMethods { get; set; }
         public ICollection<Order> Orders { get; set; }
