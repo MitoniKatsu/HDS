@@ -26,6 +26,7 @@ namespace HDS.Data
         public virtual DbSet<AddressType> AddressType { get; set; }
         public virtual DbSet<ContactMethod> ContactMethod { get; set; }
         public virtual DbSet<ContactMethodType> ContactMethodType { get; set; }
+        public virtual DbSet<EntityType> EntityType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -126,6 +127,13 @@ namespace HDS.Data
             builder.Entity<EntityAddress>()
                 .Property(o => o.Updated)
                 .HasDefaultValueSql("GETUTCDATE()");
+            // EntityType
+            builder.Entity<EntityType>()
+                .Property(o => o.Created)
+                .HasDefaultValueSql("GETUTCDATE()");
+            builder.Entity<EntityType>()
+                .Property(o => o.Updated)
+                .HasDefaultValueSql("GETUTCDATE()");
             // Inventory
             builder.Entity<Inventory>()
                 .Property(o => o.Created)
@@ -177,7 +185,6 @@ namespace HDS.Data
 
 
             #endregion
-
 
         }
     }

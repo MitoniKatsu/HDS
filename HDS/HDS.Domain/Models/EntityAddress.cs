@@ -21,5 +21,6 @@ namespace HDS.Domain.Models
 
         public Address Address { get; set; }
         public AddressType AddressType { get; set; }
+        public EntityType EntityType { get; set; }
     }
 }
