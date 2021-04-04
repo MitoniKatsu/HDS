@@ -20,5 +20,6 @@ namespace HDS.Domain.Models
         public string ContactMethodValue { get; set; }
 
         public ContactMethodType ContactMethodType { get; set; }
+        public EntityType EntityType { get; set; }
     }
 }

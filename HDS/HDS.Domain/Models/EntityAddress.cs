@@ -14,6 +14,8 @@ namespace HDS.Domain.Models
         [Required]
         public int EntityID { get; set; }
         [Required]
+        public int EntityTypeID { get; set; }
+        [Required]
         public int AddressID { get; set; }
         [Required]
         public int AddressTypeID { get; set; }
