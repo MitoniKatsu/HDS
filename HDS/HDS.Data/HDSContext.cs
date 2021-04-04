@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HDS.Data
 {
-    public class HDSContext : DbContext
+    public class HDSContext : DbContext, IHDSContext
     {
         public HDSContext()
         {
@@ -17,16 +17,21 @@ namespace HDS.Data
         {
         }
 
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<Store> Store { get; set; }
-        public virtual DbSet<StoreRole> StoreRole { get; set; }
-        public virtual DbSet<EntityAddress> EntityAddress { get; set; }
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AddressType> AddressType { get; set; }
         public virtual DbSet<ContactMethod> ContactMethod { get; set; }
         public virtual DbSet<ContactMethodType> ContactMethodType { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeePosition> EmployeePosition { get; set; }
+        public virtual DbSet<EntityAddress> EntityAddress { get; set; }
         public virtual DbSet<EntityType> EntityType { get; set; }
+        public virtual DbSet<Inventory> Inventory { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<Service> Service { get; set; }
+        public virtual DbSet<Store> Store { get; set; }
+        public virtual DbSet<StoreRole> StoreRole { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
