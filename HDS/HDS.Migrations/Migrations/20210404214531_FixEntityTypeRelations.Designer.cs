@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HDS.Migrations.Migrations
 {
     [DbContext(typeof(HDSContext))]
-    [Migration("20210404194753_FixEntityTypeRelations")]
+    [Migration("20210404214531_FixEntityTypeRelations")]
     partial class FixEntityTypeRelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,7 +113,7 @@ namespace HDS.Migrations.Migrations
                     b.Property<int>("EntityID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EntityTypeID")
+                    b.Property<int>("EntityTypeID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Updated")
@@ -580,7 +580,9 @@ namespace HDS.Migrations.Migrations
 
                     b.HasOne("HDS.Domain.Models.EntityType", "EntityType")
                         .WithMany()
-                        .HasForeignKey("EntityTypeID");
+                        .HasForeignKey("EntityTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ContactMethodType");
 

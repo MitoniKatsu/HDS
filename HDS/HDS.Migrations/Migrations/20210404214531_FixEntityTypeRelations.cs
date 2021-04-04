@@ -24,7 +24,8 @@ namespace HDS.Migrations.Migrations
                 name: "EntityTypeID",
                 table: "ContactMethod",
                 type: "int",
-                nullable: true);
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContactMethod_EntityTypeID",
@@ -37,7 +38,7 @@ namespace HDS.Migrations.Migrations
                 column: "EntityTypeID",
                 principalTable: "EntityType",
                 principalColumn: "EntityTypeID",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_EntityAddress_EntityType_EntityTypeID",

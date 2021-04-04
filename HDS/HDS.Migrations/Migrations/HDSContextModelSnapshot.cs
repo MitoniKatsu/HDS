@@ -111,7 +111,7 @@ namespace HDS.Migrations.Migrations
                     b.Property<int>("EntityID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EntityTypeID")
+                    b.Property<int>("EntityTypeID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Updated")
@@ -578,7 +578,9 @@ namespace HDS.Migrations.Migrations
 
                     b.HasOne("HDS.Domain.Models.EntityType", "EntityType")
                         .WithMany()
-                        .HasForeignKey("EntityTypeID");
+                        .HasForeignKey("EntityTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ContactMethodType");
 
