@@ -23,4 +23,16 @@
     <ProjectReference Include="..\HDS.Data\HDS.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Seed\AddressType.Seed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seed\ContactMethodType.Seed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seed\EntityType.Seed.Sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
