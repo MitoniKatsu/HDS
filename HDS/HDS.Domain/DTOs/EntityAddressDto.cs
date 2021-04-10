@@ -10,7 +10,7 @@ namespace HDS.Domain.DTOs
     {
         public int EntityTypeID { get; set; }
         public int AddressTypeID { get; set; }
-        public bool Primary { get; set; }
+        public bool? Primary { get; set; }
     }
 
     public class EntityAddressDto : BaseEntityAddressDto

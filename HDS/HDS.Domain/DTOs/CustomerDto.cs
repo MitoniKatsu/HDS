@@ -22,6 +22,6 @@ namespace HDS.Domain.DTOs
     public class CreateCustomerDto : BaseCustomerDto
     {
         public IList<CreateEntityAddressDto> Addresses { get; set; }
-        //public IList<CreateContactMethodDto> ContactMethods { get; set; }
+        public IList<CreateContactMethodDto> ContactMethods { get; set; }
     }
 }

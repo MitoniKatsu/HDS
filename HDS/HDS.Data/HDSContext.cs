@@ -207,5 +207,15 @@ namespace HDS.Data
             #endregion
 
         }
+
+        public override TEntity Find<TEntity>(params object[] keyValues)
+        {
+            return base.Find<TEntity>(keyValues);
+        }
+
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
     }
 }

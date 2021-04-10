@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HDS.Domain.DTOs;
+using HDS.Domain.Utility;
 
 namespace HDS.Data.Repository
 {
@@ -12,6 +9,16 @@ namespace HDS.Data.Repository
         public CustomerRepository(IHDSContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public CustomerDto CreateCustomer(CreateCustomerDto newCustomer)
+        {
+            _dbContext.ValidateData(newCustomer);
+            var entity = newCustomer.ToEntity();
+            _dbContext.Customer.Add(entity);
+            _dbContext.SaveChanges();
+
+            return entity.ToDto();
         }
     }
 }

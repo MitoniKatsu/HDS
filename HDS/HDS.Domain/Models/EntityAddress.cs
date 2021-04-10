@@ -19,7 +19,7 @@ namespace HDS.Domain.Models
         public int AddressID { get; set; }
         [Required]
         public int AddressTypeID { get; set; }
-        public bool Primary { get; set; }
+        public bool Primary { get; set; } = false;
 
         public Address Address { get; set; }
         public AddressType AddressType { get; set; }

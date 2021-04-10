@@ -20,5 +20,8 @@ namespace HDS.Data
         DbSet<Service> Service { get; set; }
         DbSet<Store> Store { get; set; }
         DbSet<StoreRole> StoreRole { get; set; }
+
+        TEntity Find<TEntity>(params object[] keyValues) where TEntity : class; 
+        int SaveChanges();
     }
 }
