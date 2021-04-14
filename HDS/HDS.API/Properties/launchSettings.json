@@ -14,7 +14,6 @@
       "launchBrowser": true,
       "launchUrl": "index.html",
       "environmentVariables": {
-        "HDS_ConnectionString": "Server=hds-project.database.windows.net;Database=HDS;User ID=dbroot;Password=S@brin@1;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
