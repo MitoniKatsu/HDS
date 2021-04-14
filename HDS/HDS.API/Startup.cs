@@ -42,8 +42,9 @@ namespace HDS.API
                 }
             });
 
-            services.AddScoped<CustomerRepository>();
-            services.AddScoped<TypesRepository>();
+            services.AddTransient<CustomerRepository>();
+            services.AddTransient<EntityAddressRepository>();
+            services.AddTransient<TypesRepository>();
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {

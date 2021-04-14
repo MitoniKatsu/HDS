@@ -130,6 +130,11 @@ namespace HDS.Domain.Utility
             Init();
             return Mapper.Map<CustomerDto>(entity);
         }
+        public static void Merge(this Customer entity, UpdateCustomerDetailsDto dto)
+        {
+            entity.FirstName = dto.FirstName;
+            entity.LastName = dto.LastName;
+        }
         #endregion
         #region EntityAddress
         public static CustomerAddress ToEntity(this CreateCustomerAddressDto dto)

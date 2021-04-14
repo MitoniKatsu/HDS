@@ -61,6 +61,23 @@ namespace HDS.API.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("{customerID}")]
+        public IActionResult Delete([FromRoute] int customerID)
+        {
+            try
+            {
+                _repo.Delete(customerID);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Create([Required][FromBody] CreateCustomerDto customer)
         {
@@ -69,6 +86,22 @@ namespace HDS.API.Controllers
                 var result = _repo.CreateCustomer(customer);
 
                 return StatusCode((int)HttpStatusCode.Created, result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateDetails([Required][FromBody] UpdateCustomerDetailsDto updatedCustomer)
+        {
+            try
+            {
+                _repo.UpdateCustomerDetails(updatedCustomer);
+
+                return Ok();
             }
             catch (Exception ex)
             {

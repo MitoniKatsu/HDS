@@ -24,4 +24,9 @@ namespace HDS.Domain.DTOs
         public IList<CreateCustomerAddressDto> Addresses { get; set; }
         public IList<CreateCustomerContactDto> ContactMethods { get; set; }
     }
+
+    public class UpdateCustomerDetailsDto : BaseCustomerDto
+    {
+        public int CustomerID { get; set; }
+    }
 }
