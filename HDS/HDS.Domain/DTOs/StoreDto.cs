@@ -11,8 +11,8 @@ namespace HDS.Domain.DTOs
         public int StoreID { get; set; }
         public string StoreName { get; set; }
 
-        public IList<EntityAddressDto> Addresses { get; set; }
-        public IList<ContactMethodDto> ContactMethods { get; set; }
+        public IList<StoreAddressDto> Addresses { get; set; }
+        public IList<StoreContactDto> ContactMethods { get; set; }
         public IList<StoreRoleDto> Positions { get; set; }
         public IList<InventoryDto> Inventory { get; set; }
     }

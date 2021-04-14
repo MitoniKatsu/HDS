@@ -18,8 +18,8 @@ namespace HDS.Domain.Models
         [Required]
         public string LastName { get; set; }
 
-        public ICollection<EntityAddress> Addresses { get; set; }
-        public ICollection<ContactMethod> ContactMethods { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public ICollection<CustomerAddress> Addresses { get; set; }
+        public ICollection<CustomerContact> ContactMethods { get; set; }
     }
 }

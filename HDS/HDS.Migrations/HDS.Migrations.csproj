@@ -30,9 +30,6 @@
     <None Update="Seed\ContactMethodType.Seed.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Seed\EntityType.Seed.Sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

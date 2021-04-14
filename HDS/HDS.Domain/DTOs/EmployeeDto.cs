@@ -13,8 +13,8 @@ namespace HDS.Domain.DTOs
         public string LastName { get; set; }
 
         public IList<EmployeePositionDto> EmployeePositions { get; set; }
-        public IList<EntityAddressDto> Addresses { get; set; }
-        public IList<ContactMethodDto> ContactMethods { get; set; }
+        public IList<EmployeeAddressDto> Addresses { get; set; }
+        public IList<EmployeeContactDto> ContactMethods { get; set; }
         public IList<OrderDto> Orders { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace HDS.Domain.DTOs
 {
     public class BaseContactMethodDto
     {
-        public int EntityTypeID { get; set; }
         public int ContactMethodTypeID { get; set; }
         public string ContactMethodValue { get; set; }
 
@@ -22,8 +21,34 @@ namespace HDS.Domain.DTOs
         public ContactMethodTypeDto ContactMethodType { get; set; }
     }
 
+    public class CustomerContactDto : ContactMethodDto
+    {
+        public int CustomerID { get; set; }
+    }
+
+    public class EmployeeContactDto : ContactMethodDto
+    {
+        public int EmployeeID { get; set; }
+    }
+
+    public class StoreContactDto : ContactMethodDto
+    {
+        public int StoreID { get; set; }
+    }
+
     public class CreateContactMethodDto : BaseContactMethodDto
     {
+    }
 
+    public class CreateCustomerContactDto : CreateContactMethodDto
+    {
+    }
+
+    public class CreateEmployeeContactDto : CreateContactMethodDto
+    {
+    }
+
+    public class CreateStoreContactDto : CreateContactMethodDto
+    {
     }
 }

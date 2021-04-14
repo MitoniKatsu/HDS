@@ -8,7 +8,6 @@ namespace HDS.Domain.DTOs
 {
     public class BaseEntityAddressDto
     {
-        public int EntityTypeID { get; set; }
         public int AddressTypeID { get; set; }
         public bool? Primary { get; set; }
     }
@@ -21,11 +20,37 @@ namespace HDS.Domain.DTOs
         public int AddressID { get; set; }
         public AddressDto Address { get; set; }
         public AddressTypeDto AddressType { get; set; }
-        public EntityTypeDto EntityType { get; set; }
+    }
+
+    public class CustomerAddressDto : EntityAddressDto
+    {
+        public int CustomerID { get; set; }
+    }
+
+    public class EmployeeAddressDto : EntityAddressDto
+    {
+        public int EmployeeID { get; set; }
+    }
+
+    public class StoreAddressDto : EntityAddressDto
+    {
+        public int StoreID { get; set; }
     }
 
     public class CreateEntityAddressDto : BaseEntityAddressDto
     {
         public CreateAddressDto Address { get; set; }
+    }
+
+    public class CreateCustomerAddressDto : CreateEntityAddressDto
+    {
+    }
+
+    public class CreateEmployeeAddressDto : CreateEntityAddressDto
+    {
+    }
+
+    public class CreateStoreAddressDto : CreateEntityAddressDto
+    {
     }
 }

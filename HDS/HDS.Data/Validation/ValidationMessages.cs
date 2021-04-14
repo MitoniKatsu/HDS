@@ -37,10 +37,6 @@ namespace HDS.Domain.Utility
         public const string EntityAddressIDRequired = "EntityAddressID is required";
         public const string EntityIDNotFound = "EntityID not found";
         public const string EntityIDRequired = "EntityID is required";
-        public const string EntityTypeIDNotFound = "EntityTypeID not found";
-        public const string EntityTypeIDRequired = "EntityTypeID is required";
-        public const string EntityTypeNameLength = "EntityTypeName has a max length of 50";
-        public const string EntityTypeNameRequired = "EntityTypeName is required";
         public const string FirstNameLength = "FirstName has a max length of 100";
         public const string FirstNameRequired = "FirstName is required";
         public const string LastNameLength = "LastName has a max length of 100";

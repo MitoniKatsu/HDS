@@ -21,41 +21,41 @@ namespace HDS.Domain.Utility
             // LastName
             errors.AddIfExists(dto.LastName.ValidateRequired(ValidationMessages.LastNameRequired));
             errors.AddIfExists(dto.LastName.ValidateLength(100, ValidationMessages.LastNameLength));
-            // Addresses
-            for (int i = 0; i < dto.Addresses.Count; i++)
+            if (dto.Addresses != null && dto.Addresses.Any())
             {
-                // EntityTypeID
-                errors.AddIfExists(dto.Addresses[i].EntityTypeID.ValidateRequired($"Address [{i}]:{ValidationMessages.EntityTypeIDRequired}"));
-                errors.AddIfExists(context.KeyExists<EntityType>(dto.Addresses[i].EntityTypeID, $"Address [{i}]:{ValidationMessages.EntityTypeIDNotFound}"));
-                // AddressTypeID
-                errors.AddIfExists(dto.Addresses[i].AddressTypeID.ValidateRequired($"Address [{i}]:{ValidationMessages.AddressTypeIDRequired}"));
-                errors.AddIfExists(context.KeyExists<AddressType>(dto.Addresses[i].AddressTypeID, $"Address [{i}]:{ValidationMessages.AddressTypeIDNotFound}"));
-                // Address
-                // Street Address
-                errors.AddIfExists(dto.Addresses[i].Address?.StreetAddress.ValidateRequired($"Address [{i}]:{ValidationMessages.StreetAddressRequired}"));
-                errors.AddIfExists(dto.Addresses[i].Address?.StreetAddress.ValidateLength(100, $"Address [{i}]:{ValidationMessages.StreetAddressRequired}"));
-                // City
-                errors.AddIfExists(dto.Addresses[i].Address?.City.ValidateRequired($"Address [{i}]:{ValidationMessages.CityRequired}"));
-                errors.AddIfExists(dto.Addresses[i].Address?.City.ValidateLength(50, $"Address [{i}]:{ValidationMessages.CityLength}"));
-                // State
-                errors.AddIfExists(dto.Addresses[i].Address?.State.ValidateRequired($"Address [{i}]:{ValidationMessages.StateRequired}"));
-                errors.AddIfExists(dto.Addresses[i].Address?.State.ValidateLength(50, $"Address [{i}]:{ValidationMessages.StateLength}"));
-                // PostCode
-                errors.AddIfExists(dto.Addresses[i].Address?.PostalCode.ValidateRequired($"Address [{i}]:{ValidationMessages.PostalCodeRequired}"));
-                errors.AddIfExists(dto.Addresses[i].Address?.PostalCode.ValidateLength(10, $"Address [{i}]:{ValidationMessages.PostalCodeLength}"));
+                // Addresses
+                for (int i = 0; i < dto.Addresses.Count; i++)
+                {
+                    // AddressTypeID
+                    errors.AddIfExists(dto.Addresses[i].AddressTypeID.ValidateRequired($"Address [{i}]:{ValidationMessages.AddressTypeIDRequired}"));
+                    errors.AddIfExists(context.KeyExists<AddressType>(dto.Addresses[i].AddressTypeID, $"Address [{i}]:{ValidationMessages.AddressTypeIDNotFound}"));
+                    // Address
+                    // Street Address
+                    errors.AddIfExists(dto.Addresses[i].Address?.StreetAddress.ValidateRequired($"Address [{i}]:{ValidationMessages.StreetAddressRequired}"));
+                    errors.AddIfExists(dto.Addresses[i].Address?.StreetAddress.ValidateLength(100, $"Address [{i}]:{ValidationMessages.StreetAddressRequired}"));
+                    // City
+                    errors.AddIfExists(dto.Addresses[i].Address?.City.ValidateRequired($"Address [{i}]:{ValidationMessages.CityRequired}"));
+                    errors.AddIfExists(dto.Addresses[i].Address?.City.ValidateLength(50, $"Address [{i}]:{ValidationMessages.CityLength}"));
+                    // State
+                    errors.AddIfExists(dto.Addresses[i].Address?.State.ValidateRequired($"Address [{i}]:{ValidationMessages.StateRequired}"));
+                    errors.AddIfExists(dto.Addresses[i].Address?.State.ValidateLength(50, $"Address [{i}]:{ValidationMessages.StateLength}"));
+                    // PostCode
+                    errors.AddIfExists(dto.Addresses[i].Address?.PostalCode.ValidateRequired($"Address [{i}]:{ValidationMessages.PostalCodeRequired}"));
+                    errors.AddIfExists(dto.Addresses[i].Address?.PostalCode.ValidateLength(10, $"Address [{i}]:{ValidationMessages.PostalCodeLength}"));
+                }
             }
-            // ContactMethods
-            for (int i = 0; i < dto.ContactMethods.Count; i++)
+            if (dto.ContactMethods != null && dto.ContactMethods.Any())
             {
-                // EntityTypeID
-                errors.AddIfExists(dto.ContactMethods[i].EntityTypeID.ValidateRequired($"ContactMethod [{i}]:{ValidationMessages.EntityTypeIDRequired}"));
-                errors.AddIfExists(context.KeyExists<EntityType>(dto.Addresses[i].EntityTypeID, $"ContactMethod [{i}]:{ValidationMessages.EntityTypeIDNotFound}"));
-                // ContactMethodTypeID
-                errors.AddIfExists(dto.ContactMethods[i].ContactMethodTypeID.ValidateRequired($"ContactMethod [{i}]:{ValidationMessages.ContactMethodTypeIDRequired}"));
-                errors.AddIfExists(context.KeyExists<ContactMethodType>(dto.ContactMethods[i].ContactMethodTypeID, $"ContactMethod [{i}]:{ValidationMessages.ContactMethodTypeIDNotFound}"));
-                // ContactMethod Value
-                errors.AddIfExists(dto.ContactMethods[i].ContactMethodValue.ValidateRequired($"ContactMethod [{i}]:{ValidationMessages.StreetAddressRequired}"));
-                errors.AddIfExists(dto.ContactMethods[i].ContactMethodValue.ValidateLength(100, $"ContactMethod [{i}]:{ValidationMessages.StreetAddressRequired}"));
+                // ContactMethods
+                for (int i = 0; i < dto.ContactMethods.Count; i++)
+                {
+                    // ContactMethodTypeID
+                    errors.AddIfExists(dto.ContactMethods[i].ContactMethodTypeID.ValidateRequired($"ContactMethod [{i}]:{ValidationMessages.ContactMethodTypeIDRequired}"));
+                    errors.AddIfExists(context.KeyExists<ContactMethodType>(dto.ContactMethods[i].ContactMethodTypeID, $"ContactMethod [{i}]:{ValidationMessages.ContactMethodTypeIDNotFound}"));
+                    // ContactMethod Value
+                    errors.AddIfExists(dto.ContactMethods[i].ContactMethodValue.ValidateRequired($"ContactMethod [{i}]:{ValidationMessages.StreetAddressRequired}"));
+                    errors.AddIfExists(dto.ContactMethods[i].ContactMethodValue.ValidateLength(100, $"ContactMethod [{i}]:{ValidationMessages.StreetAddressRequired}"));
+                }
             }
 
             if (errors.Length > 0)

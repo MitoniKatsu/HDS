@@ -19,8 +19,8 @@ namespace HDS.Domain.Models
         public string LastName { get; set; }
 
         public ICollection<EmployeePosition> EmployeePositions { get; set; }
-        public ICollection<EntityAddress> Addresses { get; set; }
-        public ICollection<ContactMethod> ContactMethods { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public ICollection<EmployeeAddress> Addresses { get; set; }
+        public ICollection<EmployeeContact> ContactMethods { get; set; }
     }
 }

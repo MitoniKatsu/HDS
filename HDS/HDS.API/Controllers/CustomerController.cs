@@ -24,6 +24,43 @@ namespace HDS.API.Controllers
             _repo = repo;
         }
 
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            try
+            {
+                var result = _repo.GetList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{customerID}")]
+        public IActionResult GetByID([FromRoute] int customerID)
+        {
+            try
+            {
+                var result = _repo.GetByID(customerID);
+
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Create([Required][FromBody] CreateCustomerDto customer)
         {

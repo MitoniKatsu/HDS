@@ -21,9 +21,10 @@ namespace HDS.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,9 +36,14 @@ namespace HDS.API
             services.AddDbContext<IHDSContext, HDSContext>(o =>
             {
                 o.UseSqlServer(Configuration.GetValue<string>("HDS_ConnectionString"));
+                if (Environment.IsDevelopment())
+                {
+                    o.EnableSensitiveDataLogging();
+                }
             });
 
             services.AddScoped<CustomerRepository>();
+            services.AddScoped<TypesRepository>();
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {

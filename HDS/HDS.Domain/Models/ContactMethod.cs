@@ -12,16 +12,29 @@ namespace HDS.Domain.Models
         [Key]
         public int ContactMethodID { get; set; }
         [Required]
-        public int EntityID { get; set; }
-        [Required]
-        public int EntityTypeID { get; set; }
-        [Required]
         public int ContactMethodTypeID { get; set; }
         [MaxLength(100)]
         [Required]
         public string ContactMethodValue { get; set; }
 
         public ContactMethodType ContactMethodType { get; set; }
-        public EntityType EntityType { get; set; }
+    }
+
+    public class CustomerContact : ContactMethod
+    {
+        [Required]
+        public int CustomerID { get; set; }
+    }
+
+    public class EmployeeContact : ContactMethod
+    {
+        [Required]
+        public int EmployeeID { get; set; }
+    }
+
+    public class StoreContact : ContactMethod
+    {
+        [Required]
+        public int StoreID { get; set; }
     }
 }

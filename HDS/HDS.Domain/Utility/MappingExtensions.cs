@@ -32,8 +32,12 @@ namespace HDS.Domain.Utility
                 cfg.CreateMap<AddressType, AddressTypeDto>();
                 #endregion
                 #region ContactMethod
-                cfg.CreateMap<CreateContactMethodDto, ContactMethod>();
-                cfg.CreateMap<ContactMethod, ContactMethodDto>();
+                cfg.CreateMap<CreateCustomerContactDto, CustomerContact>();
+                cfg.CreateMap<CustomerContact, CustomerContactDto>();
+                cfg.CreateMap<CreateEmployeeContactDto, EmployeeContact>();
+                cfg.CreateMap<EmployeeContact, EmployeeContactDto>();
+                cfg.CreateMap<CreateStoreContactDto, StoreContact>();
+                cfg.CreateMap<StoreContact, StoreContactDto>();
                 #endregion
                 #region ContactMethodType
                 cfg.CreateMap<ContactMethodType, ContactMethodTypeDto>();
@@ -43,11 +47,12 @@ namespace HDS.Domain.Utility
                 cfg.CreateMap<Customer, CustomerDto>();
                 #endregion
                 #region EntityAddress
-                cfg.CreateMap<CreateEntityAddressDto, EntityAddress>();
-                cfg.CreateMap<EntityAddress, EntityAddressDto>();
-                #endregion
-                #region EntityType
-                cfg.CreateMap<EntityType, EntityTypeDto>();
+                cfg.CreateMap<CreateCustomerAddressDto, CustomerAddress>();
+                cfg.CreateMap<CustomerAddress, CustomerAddressDto>();
+                cfg.CreateMap<CreateEmployeeAddressDto, EmployeeAddress>();
+                cfg.CreateMap<EmployeeAddress, EmployeeAddressDto>();
+                cfg.CreateMap<CreateStoreAddressDto, StoreAddress>();
+                cfg.CreateMap<StoreAddress, StoreAddressDto>();
                 #endregion
 
                 #endregion
@@ -76,15 +81,35 @@ namespace HDS.Domain.Utility
         }
         #endregion
         #region ContactMethod
-        public static ContactMethod ToEntity(this CreateContactMethodDto dto)
+        public static CustomerContact ToEntity(this CreateCustomerContactDto dto)
         {
             Init();
-            return Mapper.Map<ContactMethod>(dto);
+            return Mapper.Map<CustomerContact>(dto);
         }
-        public static ContactMethodDto ToDto(this ContactMethod entity)
+        public static CustomerContactDto ToDto(this CustomerContact entity)
         {
             Init();
-            return Mapper.Map<ContactMethodDto>(entity);
+            return Mapper.Map<CustomerContactDto>(entity);
+        }
+        public static EmployeeContact ToEntity(this CreateEmployeeContactDto dto)
+        {
+            Init();
+            return Mapper.Map<EmployeeContact>(dto);
+        }
+        public static EmployeeContactDto ToDto(this EmployeeContact entity)
+        {
+            Init();
+            return Mapper.Map<EmployeeContactDto>(entity);
+        }
+        public static StoreContact ToEntity(this CreateStoreContactDto dto)
+        {
+            Init();
+            return Mapper.Map<StoreContact>(dto);
+        }
+        public static StoreContactDto ToDto(this StoreContact entity)
+        {
+            Init();
+            return Mapper.Map<StoreContactDto>(entity);
         }
         #endregion
         #region ContactMethodType
@@ -107,22 +132,35 @@ namespace HDS.Domain.Utility
         }
         #endregion
         #region EntityAddress
-        public static EntityAddress ToEntity(this CreateEntityAddressDto dto)
+        public static CustomerAddress ToEntity(this CreateCustomerAddressDto dto)
         {
             Init();
-            return Mapper.Map<EntityAddress>(dto);
+            return Mapper.Map<CustomerAddress>(dto);
         }
-        public static EntityAddressDto ToDto(this EntityAddress entity)
+        public static CustomerAddressDto ToDto(this CustomerAddress entity)
         {
             Init();
-            return Mapper.Map<EntityAddressDto>(entity);
+            return Mapper.Map<CustomerAddressDto>(entity);
         }
-        #endregion
-        #region EntityType
-        public static EntityTypeDto ToDto(this EntityType entity)
+        public static EmployeeAddress ToEntity(this CreateEmployeeAddressDto dto)
         {
             Init();
-            return Mapper.Map<EntityTypeDto>(entity);
+            return Mapper.Map<EmployeeAddress>(dto);
+        }
+        public static EmployeeAddressDto ToDto(this EmployeeAddress entity)
+        {
+            Init();
+            return Mapper.Map<EmployeeAddressDto>(entity);
+        }
+        public static StoreAddress ToEntity(this CreateStoreAddressDto dto)
+        {
+            Init();
+            return Mapper.Map<StoreAddress>(dto);
+        }
+        public static StoreAddressDto ToDto(this StoreAddress entity)
+        {
+            Init();
+            return Mapper.Map<StoreAddressDto>(entity);
         }
         #endregion
     }

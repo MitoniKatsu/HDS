@@ -108,11 +108,9 @@ namespace HDS.Migrations.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("EntityID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EntityTypeID")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Updated")
                         .ValueGeneratedOnAdd()
@@ -123,11 +121,9 @@ namespace HDS.Migrations.Migrations
 
                     b.HasIndex("ContactMethodTypeID");
 
-                    b.HasIndex("EntityID");
-
-                    b.HasIndex("EntityTypeID");
-
                     b.ToTable("ContactMethod");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ContactMethod");
                 });
 
             modelBuilder.Entity("HDS.Domain.Models.ContactMethodType", b =>
@@ -271,11 +267,9 @@ namespace HDS.Migrations.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("EntityID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EntityTypeID")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Primary")
                         .HasColumnType("bit");
@@ -291,38 +285,9 @@ namespace HDS.Migrations.Migrations
 
                     b.HasIndex("AddressTypeID");
 
-                    b.HasIndex("EntityID");
-
-                    b.HasIndex("EntityTypeID");
-
                     b.ToTable("EntityAddress");
-                });
 
-            modelBuilder.Entity("HDS.Domain.Models.EntityType", b =>
-                {
-                    b.Property<int>("EntityTypeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<string>("EntityTypeName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("Updated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.HasKey("EntityTypeID");
-
-                    b.ToTable("EntityType");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("EntityAddress");
                 });
 
             modelBuilder.Entity("HDS.Domain.Models.Inventory", b =>
@@ -550,6 +515,78 @@ namespace HDS.Migrations.Migrations
                     b.ToTable("StoreRole");
                 });
 
+            modelBuilder.Entity("HDS.Domain.Models.CustomerContact", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.ContactMethod");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasDiscriminator().HasValue("CustomerContact");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.EmployeeContact", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.ContactMethod");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.HasDiscriminator().HasValue("EmployeeContact");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.StoreContact", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.ContactMethod");
+
+                    b.Property<int>("StoreID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("StoreID");
+
+                    b.HasDiscriminator().HasValue("StoreContact");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.CustomerAddress", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.EntityAddress");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasDiscriminator().HasValue("CustomerAddress");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.EmployeeAddress", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.EntityAddress");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.HasDiscriminator().HasValue("EmployeeAddress");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.StoreAddress", b =>
+                {
+                    b.HasBaseType("HDS.Domain.Models.EntityAddress");
+
+                    b.Property<int>("StoreID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("StoreID");
+
+                    b.HasDiscriminator().HasValue("StoreAddress");
+                });
+
             modelBuilder.Entity("HDS.Domain.Models.ContactMethod", b =>
                 {
                     b.HasOne("HDS.Domain.Models.ContactMethodType", "ContactMethodType")
@@ -558,33 +595,7 @@ namespace HDS.Migrations.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HDS.Domain.Models.Customer", null)
-                        .WithMany("ContactMethods")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.Employee", null)
-                        .WithMany("ContactMethods")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.Store", null)
-                        .WithMany("ContactMethods")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.EntityType", "EntityType")
-                        .WithMany()
-                        .HasForeignKey("EntityTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ContactMethodType");
-
-                    b.Navigation("EntityType");
                 });
 
             modelBuilder.Entity("HDS.Domain.Models.EmployeePosition", b =>
@@ -620,35 +631,9 @@ namespace HDS.Migrations.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HDS.Domain.Models.Customer", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.Employee", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.Store", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("EntityID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HDS.Domain.Models.EntityType", "EntityType")
-                        .WithMany()
-                        .HasForeignKey("EntityTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Address");
 
                     b.Navigation("AddressType");
-
-                    b.Navigation("EntityType");
                 });
 
             modelBuilder.Entity("HDS.Domain.Models.Inventory", b =>
@@ -714,6 +699,60 @@ namespace HDS.Migrations.Migrations
                         .IsRequired();
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.CustomerContact", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Customer", null)
+                        .WithMany("ContactMethods")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.EmployeeContact", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Employee", null)
+                        .WithMany("ContactMethods")
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.StoreContact", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Store", null)
+                        .WithMany("ContactMethods")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.CustomerAddress", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Customer", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.EmployeeAddress", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Employee", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HDS.Domain.Models.StoreAddress", b =>
+                {
+                    b.HasOne("HDS.Domain.Models.Store", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HDS.Domain.Models.Customer", b =>
