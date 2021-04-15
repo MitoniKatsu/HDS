@@ -10,12 +10,14 @@ namespace HDS.Data
         DbSet<CustomerContact> CustomerContact { get; set; }
         DbSet<EmployeeContact> EmployeeContact { get; set; }
         DbSet<StoreContact> StoreContact { get; set; }
+        DbSet<ContactMethod> ContactMethod { get; set; }
         DbSet<ContactMethodType> ContactMethodType { get; set; }
         DbSet<Customer> Customer { get; set; }
         DbSet<Employee> Employee { get; set; }
         DbSet<EmployeePosition> EmployeePosition { get; set; }
         DbSet<CustomerAddress> CustomerAddress { get; set; }
         DbSet<EmployeeAddress> EmployeeAddress { get; set; }
+        DbSet<EntityAddress> EntityAddress { get; set; }
         DbSet<StoreAddress> StoreAddress { get; set; }
         DbSet<Inventory> Inventory { get; set; }
         DbSet<Order> Order { get; set; }

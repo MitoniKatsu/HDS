@@ -72,6 +72,13 @@ namespace HDS.Domain.Utility
             Init();
             return Mapper.Map<AddressDto>(entity);
         }
+        public static void Merge(this Address entity, AddressDto dto)
+        {
+            entity.StreetAddress = dto.StreetAddress;
+            entity.City = dto.City;
+            entity.State = dto.State;
+            entity.PostalCode = dto.PostalCode;
+        }
         #endregion
         #region AddressType
         public static AddressTypeDto ToDto(this AddressType entity)
@@ -110,6 +117,11 @@ namespace HDS.Domain.Utility
         {
             Init();
             return Mapper.Map<StoreContactDto>(entity);
+        }
+        public static void Merge(this ContactMethod entity, UpdateContactMethodDto dto)
+        {
+            entity.ContactMethodTypeID = dto.ContactMethodTypeID;
+            entity.ContactMethodValue = dto.ContactMethodValue;
         }
         #endregion
         #region ContactMethodType
@@ -166,6 +178,12 @@ namespace HDS.Domain.Utility
         {
             Init();
             return Mapper.Map<StoreAddressDto>(entity);
+        }
+        public static void Merge(this EntityAddress entity, UpdateEntityAddressDto dto)
+        {
+            entity.AddressTypeID = dto.AddressTypeID;
+            entity.Primary = dto.Primary ?? false;
+            entity.Address.Merge(dto.Address);
         }
         #endregion
     }

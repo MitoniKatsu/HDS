@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace HDS.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TypesController : ControllerBase
     {
         private readonly ILogger<TypesController> _logger;

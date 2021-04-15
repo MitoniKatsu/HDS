@@ -8,6 +8,7 @@ namespace HDS.Domain.Utility
 {
     public static class ValidationMessages
     {
+        public const string AddressRequired = "Address is required";
         public const string AddressIDNotFound = "AddressID not found";
         public const string AddressIDRequired = "AddressID is required";
         public const string AddressTypeIDNotFound = "AddressTypeID not found";

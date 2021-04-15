@@ -3,7 +3,7 @@
     "HDS.Migrations": {
       "commandName": "Project",
       "environmentVariables": {
-        "HDS_ConnectionString": "Server=hds-project.database.windows.net;Database=HDS;User ID=dbroot;Password=S@brin@1;"
+        "HDS_ConnectionString": "Server=hds-project.database.windows.net;Database=HDS;User ID=dbroot;Password=DevPass1;"
       }
     }
   }

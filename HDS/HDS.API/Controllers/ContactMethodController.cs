@@ -1,25 +1,20 @@
 ﻿using HDS.Data.Repository;
-using HDS.Domain;
 using HDS.Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace HDS.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EntityAddressController : ControllerBase
+    public class ContactMethodController : ControllerBase
     {
-        private readonly ILogger<EntityAddressController> _logger;
-        private readonly EntityAddressRepository _repo;
+        private readonly ILogger<ContactMethodController> _logger;
+        private readonly ContactMethodRepository _repo;
 
-        public EntityAddressController(ILogger<EntityAddressController> logger, EntityAddressRepository repo)
+        public ContactMethodController(ILogger<ContactMethodController> logger, ContactMethodRepository repo)
         {
             _logger = logger;
             _repo = repo;
@@ -27,7 +22,7 @@ namespace HDS.API.Controllers
 
         [HttpPost]
         [Route("customer/{customerID}")]
-        public IActionResult Create([FromRoute] int customerID, [FromBody] CreateCustomerAddressDto dto)
+        public IActionResult Create([FromRoute] int customerID, [FromBody] CreateCustomerContactDto dto)
         {
             try
             {
@@ -44,7 +39,7 @@ namespace HDS.API.Controllers
 
         [HttpPost]
         [Route("employee/{employeeID}")]
-        public IActionResult Create([FromRoute] int employeeID, [FromBody] CreateEmployeeAddressDto dto)
+        public IActionResult Create([FromRoute] int employeeID, [FromBody] CreateEmployeeContactDto dto)
         {
             try
             {
@@ -61,7 +56,7 @@ namespace HDS.API.Controllers
 
         [HttpPost]
         [Route("store/{storeID}")]
-        public IActionResult Create([FromRoute] int storeID, [FromBody] CreateStoreAddressDto dto)
+        public IActionResult Create([FromRoute] int storeID, [FromBody] CreateStoreContactDto dto)
         {
             try
             {
@@ -78,45 +73,13 @@ namespace HDS.API.Controllers
 
         [HttpPut]
         [Route("customer")]
-        public IActionResult UpdateCustomerAddress([FromBody] UpdateEntityAddressDto dto)
-        {
-            try
-            {
-                _repo.Update(dto, EntityType.Customer);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPut]
         [Route("employee")]
-        public IActionResult UpdateEmployeeAddress([FromBody] UpdateEntityAddressDto dto)
-        {
-            try
-            {
-                _repo.Update(dto, EntityType.Employee);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPut]
         [Route("store")]
-        public IActionResult UpdateStoreAddress([FromBody] UpdateEntityAddressDto dto)
+        public IActionResult Update([FromBody] UpdateContactMethodDto dto)
         {
             try
             {
-                _repo.Update(dto, EntityType.Store);
+                _repo.Update(dto);
 
                 return Ok();
             }
@@ -128,12 +91,12 @@ namespace HDS.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{entityAddressID}")]
-        public IActionResult Delete([FromRoute] int entityAddressID)
+        [Route("{contactMethodID}")]
+        public IActionResult Delete([FromRoute] int contactMethodID)
         {
             try
             {
-                _repo.Delete(entityAddressID);
+                _repo.Delete(contactMethodID);
 
                 return Ok();
             }

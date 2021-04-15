@@ -22,10 +22,12 @@ namespace HDS.Data
         public virtual DbSet<CustomerContact> CustomerContact { get; set; }
         public virtual DbSet<EmployeeContact> EmployeeContact { get; set; }
         public virtual DbSet<StoreContact> StoreContact { get; set; }
+        public virtual DbSet<ContactMethod> ContactMethod { get; set; }
         public virtual DbSet<ContactMethodType> ContactMethodType { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeePosition> EmployeePosition { get; set; }
+        public virtual DbSet<EntityAddress> EntityAddress { get; set; }
         public virtual DbSet<CustomerAddress> CustomerAddress { get; set; }
         public virtual DbSet<EmployeeAddress> EmployeeAddress { get; set; }
         public virtual DbSet<StoreAddress> StoreAddress { get; set; }

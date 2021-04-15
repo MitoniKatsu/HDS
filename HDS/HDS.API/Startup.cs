@@ -35,6 +35,8 @@ namespace HDS.API
         {
             services.AddDbContext<IHDSContext, HDSContext>(o =>
             {
+                var coostring = Configuration.GetValue<string>("HDS_ConnectionString");
+                Console.Error.WriteLine(coostring);
                 o.UseSqlServer(Configuration.GetValue<string>("HDS_ConnectionString"));
                 if (Environment.IsDevelopment())
                 {
@@ -42,6 +44,7 @@ namespace HDS.API
                 }
             });
 
+            services.AddTransient<ContactMethodRepository>();
             services.AddTransient<CustomerRepository>();
             services.AddTransient<EntityAddressRepository>();
             services.AddTransient<TypesRepository>();
