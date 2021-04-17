@@ -14,6 +14,10 @@ namespace HDS.Domain.DTOs
     public class CustomerDto : BaseCustomerDto
     {
         public int CustomerID { get; set; }
+    }
+    public class CustomerVerboseDto : BaseCustomerDto
+    {
+        public int CustomerID { get; set; }
         public IList<CustomerAddressDto> Addresses { get; set; }
         public IList<CustomerContactDto> ContactMethods { get; set; }
         public IList<CustomerQueryOrderDto> Orders { get; set; }
@@ -23,10 +27,5 @@ namespace HDS.Domain.DTOs
     {
         public IList<CreateCustomerAddressDto> Addresses { get; set; }
         public IList<CreateCustomerContactDto> ContactMethods { get; set; }
-    }
-
-    public class UpdateCustomerDetailsDto : BaseCustomerDto
-    {
-        public int CustomerID { get; set; }
     }
 }

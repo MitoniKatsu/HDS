@@ -25,6 +25,12 @@ namespace HDS.API.Controllers
             _repo = repo;
         }
 
+        /// <summary>
+        /// create a customer address on an existing customer
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("customer/{customerID}")]
         public IActionResult Create([FromRoute] int customerID, [FromBody] CreateCustomerAddressDto dto)
@@ -42,6 +48,12 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// create a employee address on an existing employee
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("employee/{employeeID}")]
         public IActionResult Create([FromRoute] int employeeID, [FromBody] CreateEmployeeAddressDto dto)
@@ -59,6 +71,12 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// create a store address on an existing store
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("store/{storeID}")]
         public IActionResult Create([FromRoute] int storeID, [FromBody] CreateStoreAddressDto dto)
@@ -76,6 +94,11 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// updates an existing customer address
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("customer")]
         public IActionResult UpdateCustomerAddress([FromBody] UpdateEntityAddressDto dto)
@@ -93,6 +116,11 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// updates an existing emplopyee address
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("employee")]
         public IActionResult UpdateEmployeeAddress([FromBody] UpdateEntityAddressDto dto)
@@ -110,6 +138,11 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// updates an existing store address
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("store")]
         public IActionResult UpdateStoreAddress([FromBody] UpdateEntityAddressDto dto)
@@ -127,8 +160,15 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// deletes an entity address
+        /// </summary>
+        /// <param name="entityAddressID"></param>
+        /// <returns></returns>
         [HttpDelete]
-        [Route("{entityAddressID}")]
+        [Route("customer/{entityAddressID}")]
+        [Route("employee/{entityAddressID}")]
+        [Route("store/{entityAddressID}")]
         public IActionResult Delete([FromRoute] int entityAddressID)
         {
             try

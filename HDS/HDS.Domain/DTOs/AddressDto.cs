@@ -16,7 +16,6 @@ namespace HDS.Domain.DTOs
 
     public class AddressDto : BaseAddressDto
     {
-        public int AddressID { get; set; }
     }
 
     public class CreateAddressDto : BaseAddressDto

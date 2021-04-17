@@ -20,6 +20,12 @@ namespace HDS.API.Controllers
             _repo = repo;
         }
 
+        /// <summary>
+        /// create a customer contact on an existing customer
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("customer/{customerID}")]
         public IActionResult Create([FromRoute] int customerID, [FromBody] CreateCustomerContactDto dto)
@@ -37,6 +43,12 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// create a employee contact on an existing employee
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("employee/{employeeID}")]
         public IActionResult Create([FromRoute] int employeeID, [FromBody] CreateEmployeeContactDto dto)
@@ -54,6 +66,12 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// create a store contact on an existing store
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("store/{storeID}")]
         public IActionResult Create([FromRoute] int storeID, [FromBody] CreateStoreContactDto dto)
@@ -71,6 +89,11 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// updates an existing contact method
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("customer")]
         [Route("employee")]
@@ -90,8 +113,15 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// deletes an existing contact method
+        /// </summary>
+        /// <param name="contactMethodID"></param>
+        /// <returns></returns>
         [HttpDelete]
-        [Route("{contactMethodID}")]
+        [Route("customer/{contactMethodID}")]
+        [Route("employee/{contactMethodID}")]
+        [Route("store/{contactMethodID}")]
         public IActionResult Delete([FromRoute] int contactMethodID)
         {
             try

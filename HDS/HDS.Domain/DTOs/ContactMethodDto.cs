@@ -17,7 +17,7 @@ namespace HDS.Domain.DTOs
     {
         public int ContactMethodID { get; set; }
 
-        public ContactMethodTypeDto ContactMethodType { get; set; }
+        public ContactMethodTypeDetailsDto ContactMethodType { get; set; }
     }
 
     public class CustomerContactDto : ContactMethodDto

@@ -11,4 +11,9 @@ namespace HDS.Domain.DTOs
         public int ContactMethodTypeID { get; set; }
         public string ContactMethodTypeName { get; set; }
     }
+
+    public class ContactMethodTypeDetailsDto
+    {
+        public string ContactMethodTypeName { get; set; }
+    }
 }

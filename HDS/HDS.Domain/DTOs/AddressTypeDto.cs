@@ -11,4 +11,9 @@ namespace HDS.Domain.DTOs
         public int AddressTypeID { get; set; }
         public string AddressTypeName { get; set; }
     }
+
+    public class AddressTypeDetailsDto
+    {
+        public string AddressTypeName { get; set; }
+    }
 }

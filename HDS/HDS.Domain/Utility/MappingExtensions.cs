@@ -4,6 +4,7 @@ using HDS.Domain.DTOs;
 using HDS.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace HDS.Domain.Utility
                 #endregion
                 #region AddressType
                 cfg.CreateMap<AddressType, AddressTypeDto>();
+                cfg.CreateMap<AddressType, AddressTypeDetailsDto>();
                 #endregion
                 #region ContactMethod
                 cfg.CreateMap<CreateCustomerContactDto, CustomerContact>();
@@ -41,10 +43,12 @@ namespace HDS.Domain.Utility
                 #endregion
                 #region ContactMethodType
                 cfg.CreateMap<ContactMethodType, ContactMethodTypeDto>();
+                cfg.CreateMap<ContactMethodType, ContactMethodTypeDetailsDto>();
                 #endregion
                 #region Customer
                 cfg.CreateMap<CreateCustomerDto, Customer>();
                 cfg.CreateMap<Customer, CustomerDto>();
+                cfg.CreateMap<Customer, CustomerVerboseDto>();
                 #endregion
                 #region EntityAddress
                 cfg.CreateMap<CreateCustomerAddressDto, CustomerAddress>();
@@ -54,7 +58,36 @@ namespace HDS.Domain.Utility
                 cfg.CreateMap<CreateStoreAddressDto, StoreAddress>();
                 cfg.CreateMap<StoreAddress, StoreAddressDto>();
                 #endregion
-
+                #region Employee
+                cfg.CreateMap<CreateEmployeeDto, Employee>();
+                cfg.CreateMap<Employee, EmployeeDto>();
+                cfg.CreateMap<Employee, EmployeeVerboseDto>();
+                #endregion
+                #region EmployeePosition
+                cfg.CreateMap<CreateEmployeePositionDto, EmployeePosition>();
+                cfg.CreateMap<EmployeePosition, EmployeePositionDto>();
+                cfg.CreateMap<EmployeePosition, EmployeePositionEmployeeQueryDto>();
+                cfg.CreateMap<EmployeePosition, EmployeePositionStoreRoleQueryDto>()
+                    .ForMember(d => d.FirstName, o => o.MapFrom(s => s.Employee.FirstName))
+                    .ForMember(d => d.LastName, o => o.MapFrom(s => s.Employee.LastName));
+                #endregion
+                #region Inventory
+                cfg.CreateMap<CreateInventoryDto, Inventory>();
+                cfg.CreateMap<Inventory, InventoryVerboseDto>();
+                cfg.CreateMap<Inventory, InventoryDto>();
+                #endregion
+                #region Store
+                cfg.CreateMap<CreateStoreDto, Store>();
+                cfg.CreateMap<Store, BaseStoreDto>();
+                cfg.CreateMap<Store, StoreDto>();
+                cfg.CreateMap<Store, StoreVerboseDto>();
+                #endregion
+                #region StoreRole
+                cfg.CreateMap<CreateStoreRoleDto, StoreRole>();
+                cfg.CreateMap<StoreRole, BaseStoreRoleDto>();
+                cfg.CreateMap<StoreRole, StoreRoleDto>();
+                cfg.CreateMap<StoreRole, StoreRoleVerboseDto>();
+                cfg.CreateMap<StoreRole, StoreRoleStoreQueryDto>();
                 #endregion
 
                 Mapper.Initialize(cfg);
@@ -78,6 +111,7 @@ namespace HDS.Domain.Utility
             entity.City = dto.City;
             entity.State = dto.State;
             entity.PostalCode = dto.PostalCode;
+            entity.Updated = DateTime.UtcNow;
         }
         #endregion
         #region AddressType
@@ -122,6 +156,7 @@ namespace HDS.Domain.Utility
         {
             entity.ContactMethodTypeID = dto.ContactMethodTypeID;
             entity.ContactMethodValue = dto.ContactMethodValue;
+            entity.Updated = DateTime.UtcNow;
         }
         #endregion
         #region ContactMethodType
@@ -142,10 +177,67 @@ namespace HDS.Domain.Utility
             Init();
             return Mapper.Map<CustomerDto>(entity);
         }
-        public static void Merge(this Customer entity, UpdateCustomerDetailsDto dto)
+        public static CustomerVerboseDto ToVerboseDto(this Customer entity)
+        {
+            Init();
+            return Mapper.Map<CustomerVerboseDto>(entity);
+        }
+        public static void Merge(this Customer entity, CustomerDto dto)
         {
             entity.FirstName = dto.FirstName;
             entity.LastName = dto.LastName;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region Employee
+        public static Employee ToEntity(this CreateEmployeeDto dto)
+        {
+            Init();
+            return Mapper.Map<Employee>(dto);
+        }
+        public static EmployeeDto ToDto(this Employee entity)
+        {
+            Init();
+            return Mapper.Map<EmployeeDto>(entity);
+        }
+        public static EmployeeVerboseDto ToVerboseDto(this Employee entity)
+        {
+            Init();
+            return Mapper.Map<EmployeeVerboseDto>(entity);
+        }
+        public static void Merge(this Employee entity, EmployeeDto dto)
+        {
+            entity.FirstName = dto.FirstName;
+            entity.LastName = dto.LastName;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region EmployeePosition
+        public static EmployeePosition ToEntity(this CreateEmployeePositionDto dto)
+        {
+            Init();
+            return Mapper.Map<EmployeePosition>(dto);
+        }
+        public static EmployeePositionDto ToDto(this EmployeePosition entity)
+        {
+            Init();
+            return Mapper.Map<EmployeePositionDto>(entity);
+        }
+        public static EmployeePositionEmployeeQueryDto ToEmployeeQueryDto(this EmployeePosition entity)
+        {
+            Init();
+            return Mapper.Map<EmployeePositionEmployeeQueryDto>(entity);
+        }
+        public static EmployeePositionStoreRoleQueryDto ToStoreRoleDto(this EmployeePosition entity)
+        {
+            Init();
+            return Mapper.Map<EmployeePositionStoreRoleQueryDto>(entity);
+        }
+        public static void Merge(this EmployeePosition entity, UpdateEmployeePositionDto dto)
+        {
+            entity.EmployeeID = dto.EmployeeID;
+            entity.PositionID = dto.PositionID;
+            entity.Updated = DateTime.UtcNow;
         }
         #endregion
         #region EntityAddress
@@ -184,7 +276,86 @@ namespace HDS.Domain.Utility
             entity.AddressTypeID = dto.AddressTypeID;
             entity.Primary = dto.Primary ?? false;
             entity.Address.Merge(dto.Address);
+            entity.Updated = DateTime.UtcNow;
         }
+        #endregion
+        #region Inventory
+        public static Inventory ToEntity(this CreateInventoryDto dto)
+        {
+            Init();
+            return Mapper.Map<Inventory>(dto);
+        }
+        public static InventoryDto ToDto(this Inventory entity)
+        {
+            Init();
+            return Mapper.Map<InventoryDto>(entity);
+        }
+        public static InventoryVerboseDto ToVerboseDto(this Inventory entity)
+        {
+            Init();
+            return Mapper.Map<InventoryVerboseDto>(entity);
+        }
+        public static void Merge(this Inventory entity, UpdateInventoryDto dto)
+        {
+            entity.Model = dto.Model;
+            entity.Brand = dto.Brand;
+            entity.ProductDescription = dto.ProductDescription;
+            entity.LocationID = dto.LocationID;
+            entity.SerialNumber = dto.SerialNumber;
+            entity.Cost = dto.Cost;
+            entity.Price = dto.Price;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region Store
+        public static Store ToEntity(this CreateStoreDto dto)
+        {
+            Init();
+            return Mapper.Map<Store>(dto);
+        }
+        public static StoreDto ToDto(this Store entity)
+        {
+            Init();
+            return Mapper.Map<StoreDto>(entity);
+        }public static StoreVerboseDto ToVerboseDto(this Store entity)
+        {
+            Init();
+            return Mapper.Map<StoreVerboseDto>(entity);
+        }
+        public static void Merge(this Store entity, StoreDto dto)
+        {
+            entity.StoreName = dto.StoreName;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region StoreRole
+        public static StoreRole ToEntity(this CreateStoreRoleDto dto)
+        {
+            Init();
+            return Mapper.Map<StoreRole>(dto);
+        }
+        public static StoreRoleDto ToDto(this StoreRole entity)
+        {
+            Init();
+            return Mapper.Map<StoreRoleDto>(entity);
+        }
+        public static StoreRoleStoreQueryDto ToStoreQueryDto(this StoreRole entity)
+        {
+            Init();
+            return Mapper.Map<StoreRoleStoreQueryDto>(entity);
+        }
+        public static StoreRoleVerboseDto ToVerboseDto(this StoreRole entity)
+        {
+            Init();
+            return Mapper.Map<StoreRoleVerboseDto>(entity);
+        }
+        public static void Merge(this StoreRole entity, StoreRoleDto dto)
+        {
+            entity.StoreID = dto.StoreID;
+            entity.RoleDescription = dto.RoleDescription;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
         #endregion
     }
 }

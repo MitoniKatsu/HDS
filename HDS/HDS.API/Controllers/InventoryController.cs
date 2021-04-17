@@ -7,25 +7,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace HDS.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController : ControllerBase
+    public class InventoryController : ControllerBase
     {
-        private readonly ILogger<CustomerController> _logger;
-        private readonly CustomerRepository _repo;
+        private readonly ILogger<InventoryController> _logger;
+        private readonly InventoryRepository _repo;
 
-        public CustomerController(ILogger<CustomerController> logger, CustomerRepository repo)
+        public InventoryController(ILogger<InventoryController> logger, InventoryRepository repo)
         {
             _logger = logger;
             _repo = repo;
         }
 
         /// <summary>
-        /// Get a list of customers
+        /// Get a list of products
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -45,17 +46,17 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// get a customer by customerID
+        /// get a product by productID
         /// </summary>
-        /// <param name="customerID"></param>
+        /// <param name="productID"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{customerID}")]
-        public IActionResult GetByID([FromRoute] int customerID)
+        [Route("{productID}")]
+        public IActionResult GetByID([FromRoute] int productID)
         {
             try
             {
-                var result = _repo.GetByID(customerID);
+                var result = _repo.GetByID(productID);
 
                 if (result != null)
                 {
@@ -71,17 +72,17 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// deletes a customer by customerID
+        /// deletes a product by productID and associated order detail items
         /// </summary>
-        /// <param name="customerID"></param>
+        /// <param name="productID"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("{customerID}")]
-        public IActionResult Delete([FromRoute] int customerID)
+        [Route("{productID}")]
+        public IActionResult Delete([FromRoute] int productID)
         {
             try
             {
-                _repo.Delete(customerID);
+                _repo.Delete(productID);
 
                 return Ok();
             }
@@ -93,16 +94,16 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// creates a new customer
+        /// creates a new product
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="product"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create([Required][FromBody] CreateCustomerDto customer)
+        public IActionResult Create([Required][FromBody] CreateInventoryDto product)
         {
             try
             {
-                var result = _repo.CreateCustomer(customer);
+                var result = _repo.Create(product);
 
                 return StatusCode((int)HttpStatusCode.Created, result);
             }
@@ -114,16 +115,16 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// updates an existing customer's details
+        /// updates an existing product's details
         /// </summary>
-        /// <param name="updatedCustomer"></param>
+        /// <param name="updatedProduct"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateDetails([Required][FromBody] CustomerDto updatedCustomer)
+        public IActionResult UpdateDetails([Required][FromBody] UpdateInventoryDto updatedProduct)
         {
             try
             {
-                _repo.Update(updatedCustomer);
+                _repo.Update(updatedProduct);
 
                 return Ok();
             }

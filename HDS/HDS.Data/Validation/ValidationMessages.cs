@@ -79,7 +79,7 @@ namespace HDS.Domain.Utility
         public const string StoreNameRequired = "StoreName is required";
         public const string StoreRoleIDNotFound = "StoreRoleID not found";
         public const string StoreRoleIDRequired = "StoreRoleID is required";
-        public const string StreeAdressLength = "StreetAddress has a max length of 100";
+        public const string StreetAdressLength = "StreetAddress has a max length of 100";
         public const string StreetAddressRequired = "StreetAddress is required";
     }
 }

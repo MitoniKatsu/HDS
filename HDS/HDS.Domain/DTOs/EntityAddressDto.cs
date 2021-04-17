@@ -15,9 +15,8 @@ namespace HDS.Domain.DTOs
     public class EntityAddressDto : BaseEntityAddressDto
     {
         public int EntityAddressID { get; set; }
-        public int AddressID { get; set; }
         public AddressDto Address { get; set; }
-        public AddressTypeDto AddressType { get; set; }
+        public AddressTypeDetailsDto AddressType { get; set; }
     }
 
     public class CustomerAddressDto : EntityAddressDto

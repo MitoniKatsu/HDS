@@ -7,25 +7,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace HDS.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        private readonly ILogger<CustomerController> _logger;
-        private readonly CustomerRepository _repo;
+        private readonly ILogger<EmployeeController> _logger;
+        private readonly EmployeeRepository _repo;
 
-        public CustomerController(ILogger<CustomerController> logger, CustomerRepository repo)
+        public EmployeeController(ILogger<EmployeeController> logger, EmployeeRepository repo)
         {
             _logger = logger;
             _repo = repo;
         }
 
         /// <summary>
-        /// Get a list of customers
+        /// Get a list of employees
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -45,17 +46,17 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// get a customer by customerID
+        /// get a employee by employeeID
         /// </summary>
-        /// <param name="customerID"></param>
+        /// <param name="employeeID"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{customerID}")]
-        public IActionResult GetByID([FromRoute] int customerID)
+        [Route("{employeeID}")]
+        public IActionResult GetByID([FromRoute] int employeeID)
         {
             try
             {
-                var result = _repo.GetByID(customerID);
+                var result = _repo.GetByID(employeeID);
 
                 if (result != null)
                 {
@@ -71,17 +72,17 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// deletes a customer by customerID
+        /// deletes a employee by employeeID
         /// </summary>
-        /// <param name="customerID"></param>
+        /// <param name="employeeID"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("{customerID}")]
-        public IActionResult Delete([FromRoute] int customerID)
+        [Route("{employeeID}")]
+        public IActionResult Delete([FromRoute] int employeeID)
         {
             try
             {
-                _repo.Delete(customerID);
+                _repo.Delete(employeeID);
 
                 return Ok();
             }
@@ -93,16 +94,16 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// creates a new customer
+        /// creates a new employee
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="employee"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create([Required][FromBody] CreateCustomerDto customer)
+        public IActionResult Create([Required][FromBody] CreateEmployeeDto employee)
         {
             try
             {
-                var result = _repo.CreateCustomer(customer);
+                var result = _repo.CreateEmployee(employee);
 
                 return StatusCode((int)HttpStatusCode.Created, result);
             }
@@ -116,14 +117,14 @@ namespace HDS.API.Controllers
         /// <summary>
         /// updates an existing customer's details
         /// </summary>
-        /// <param name="updatedCustomer"></param>
+        /// <param name="updatedEmployee"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateDetails([Required][FromBody] CustomerDto updatedCustomer)
+        public IActionResult UpdateDetails([Required][FromBody] EmployeeDto updatedEmployee)
         {
             try
             {
-                _repo.Update(updatedCustomer);
+                _repo.Update(updatedEmployee);
 
                 return Ok();
             }

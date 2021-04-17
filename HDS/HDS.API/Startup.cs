@@ -46,7 +46,11 @@ namespace HDS.API
 
             services.AddTransient<ContactMethodRepository>();
             services.AddTransient<CustomerRepository>();
+            services.AddTransient<EmployeeRepository>();
             services.AddTransient<EntityAddressRepository>();
+            services.AddTransient<InventoryRepository>();
+            services.AddTransient<StoreRepository>();
+            services.AddTransient<StoreRoleRepository>();
             services.AddTransient<TypesRepository>();
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
