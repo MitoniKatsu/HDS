@@ -46,6 +46,7 @@ namespace HDS.API
 
             services.AddTransient<ContactMethodRepository>();
             services.AddTransient<CustomerRepository>();
+            services.AddTransient<EmployeePositionRepository>();
             services.AddTransient<EmployeeRepository>();
             services.AddTransient<EntityAddressRepository>();
             services.AddTransient<InventoryRepository>();

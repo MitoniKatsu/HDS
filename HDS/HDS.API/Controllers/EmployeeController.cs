@@ -72,7 +72,7 @@ namespace HDS.API.Controllers
         }
 
         /// <summary>
-        /// deletes a employee by employeeID
+        /// deletes an employee by employeeID
         /// </summary>
         /// <param name="employeeID"></param>
         /// <returns></returns>

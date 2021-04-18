@@ -252,6 +252,41 @@ namespace HDS.Domain.Utility
             }
         }
         #endregion
+        #region EmployeePosition
+        public static void ValidateData(this IHDSContext context, CreateEmployeePositionDto dto, int id)
+        {
+            var errors = new StringBuilder();
+            // PositionID
+            errors.AddIfExists(id.ValidateRequired(ValidationMessages.StoreRoleIDRequired));
+            errors.AddIfExists(context.KeyExists<StoreRole>(id, ValidationMessages.StoreRoleIDNotFound));
+            // EmployeeID
+            errors.AddIfExists(dto.EmployeeID.ValidateRequired(ValidationMessages.EmployeeIDRequired));
+            errors.AddIfExists(context.KeyExists<Employee>(dto.EmployeeID, ValidationMessages.EmployeeIDNotFound));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        public static void ValidateData(this IHDSContext context, UpdateEmployeePositionDto dto)
+        {
+            var errors = new StringBuilder();
+            // EmployeePositionID
+            errors.AddIfExists(dto.EmployeePositionID.ValidateRequired(ValidationMessages.EmployeePositionIDRequired));
+            errors.AddIfExists(context.KeyExists<EmployeePosition>(dto.EmployeePositionID, ValidationMessages.EmployeePositionIDNotFound));
+            // PositionID
+            errors.AddIfExists(dto.PositionID.ValidateRequired(ValidationMessages.StoreRoleIDRequired));
+            errors.AddIfExists(context.KeyExists<StoreRole>(dto.PositionID, ValidationMessages.StoreRoleIDNotFound));
+            // EmployeeID
+            errors.AddIfExists(dto.EmployeeID.ValidateRequired(ValidationMessages.EmployeeIDRequired));
+            errors.AddIfExists(context.KeyExists<Employee>(dto.EmployeeID, ValidationMessages.EmployeeIDNotFound));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        #endregion
         #region EntityAddress
         public static void ValidateData(this IHDSContext context, CreateCustomerAddressDto dto, int id)
         {
