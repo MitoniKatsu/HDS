@@ -12,6 +12,8 @@ namespace HDS.Domain.Models
         [Key]
         public int ServiceID { get; set; }
         [Required]
+        public int OrderID { get; set; }
+        [Required]
         public DateTime ServiceDate { get; set; }
         [MaxLength(400)]
         [Required]

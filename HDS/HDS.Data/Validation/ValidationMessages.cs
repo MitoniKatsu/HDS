@@ -56,6 +56,7 @@ namespace HDS.Domain.Utility
         public const string PostalCodeRequired = "PostalCode is required";
         public const string PriceRequired = "Price is required";
         public const string PrimaryAddressSingle = "Only one address can be set to primary at a time";
+        public const string ProductDeleteDenied = "Unable to delete an inventory item that exists in an order";
         public const string ProductDescriptionLength = "ProductDescription has a max length of 1000";
         public const string ProductDescriptionRequired = "ProductDescription is required";
         public const string ProductIDNotFound = "ProductID not found";
@@ -67,6 +68,7 @@ namespace HDS.Domain.Utility
         public const string SerialNumberLength = "SerialNumber has a max length of 100";
         public const string ServiceDateRequired = "ServiceDate is required";
         public const string ServiceDateValid = "ServiceDate must be a valid datetime";
+        public const string ServiceDeleteDenied = "Unable to delete an service that exists in an order";
         public const string ServiceDescriptionLength = "ServiceDescription has a max length of 400";
         public const string ServiceDescriptionRequired = "ServiceDescription is required";
         public const string ServiceIDNotFound = "ServiceID not found";

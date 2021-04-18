@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace HDS.Domain.DTOs
 {
-    public class ServiceDto
+    public class BaseServiceDto
     {
-        public int ServiceID { get; set; }
         public DateTime ServiceDate { get; set; }
         public string ServiceDescription { get; set; }
         public decimal Price { get; set; }
+    }
+    public class ServiceDto : BaseServiceDto
+    {
+        public int ServiceID { get; set; }
 
     }
 
-    public class CustomerQueryServiceDto : ServiceDto
+    public class CreateServiceDto : BaseServiceDto
     {
+
     }
 
-    public class ServiceQueryServiceDto : ServiceDto
+    public class UpdateServiceDto : BaseServiceDto
     {
-        public OrderDto Order { get; set; }
+        public int OrderID { get; set; }
     }
 }

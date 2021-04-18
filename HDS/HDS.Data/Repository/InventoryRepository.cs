@@ -60,6 +60,11 @@ namespace HDS.Data.Repository
             {
                 throw new ValidationException(check);
             }
+            var orderCheck = _dbContext.OrderDetail.Any(o => o.ProductID == productID);
+            if (orderCheck)
+            {
+                throw new ValidationException(ValidationMessages.ProductDeleteDenied);
+            }
 
             var product = _dbContext.Inventory
                 .Include(o => o.ProductOrderDetails)

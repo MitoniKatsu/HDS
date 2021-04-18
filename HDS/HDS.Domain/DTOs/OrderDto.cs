@@ -18,7 +18,7 @@ namespace HDS.Domain.DTOs
 
     public class CustomerQueryOrderDto : OrderDto
     {
-        public IList<CustomerQueryServiceDto> Services { get; set; }
+        public IList<ServiceDto> Services { get; set; }
         public IList<CustomerQueryOrderDetailsDto> OrderDetails { get; set; }
     }
 }
