@@ -72,10 +72,8 @@ namespace HDS.Data.Repository
                 .Include(o => o.Location)
                 .Where(o => o.ProductID == productID)
                 .SingleOrDefault();
-            //order details
-            var orderDetails = product.ProductOrderDetails;
+
             //remove records
-            _dbContext.OrderDetail.RemoveRange(orderDetails);
             _dbContext.Inventory.RemoveRange(product);
 
             _dbContext.SaveChanges();

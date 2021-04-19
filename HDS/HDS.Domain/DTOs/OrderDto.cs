@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace HDS.Domain.DTOs
 {
-    public class OrderDto
+    public class BaseOrderDto
+    {
+        public int CustomerID { get; set; }
+        public int EmployeeID { get; set; }
+    }
+    public class OrderDto : BaseOrderDto
     {
         public int OrderID { get; set; }
         public DateTime OrderDate { get; set; }
-        public int CustomerID { get; set; }
-        public int EmployeeID { get; set; }
-
-
     }
 
-    public class CustomerQueryOrderDto : OrderDto
+    public class OrderVerboseDto : OrderDto
     {
         public IList<ServiceDto> Services { get; set; }
-        public IList<CustomerQueryOrderDetailsDto> OrderDetails { get; set; }
+        public IList<OrderDetailDto> OrderDetails { get; set; }
+    }
+
+    public class CreateOrderDto : BaseOrderDto
+    {
+        public IList<CreateServiceDto> Services { get; set; }
+        public IList<CreateOrderDetailDto> OrderDetails { get; set; }
     }
 }

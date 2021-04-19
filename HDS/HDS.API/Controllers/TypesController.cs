@@ -22,6 +22,10 @@ namespace HDS.API.Controllers
             _repo = repo;
         }
 
+        /// <summary>
+        /// gets a list of address types
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("address")]
         public IActionResult GetAddressTypes()
@@ -39,6 +43,10 @@ namespace HDS.API.Controllers
             }
         }
 
+        /// <summary>
+        /// gets a list of contactmethod types
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("contactmethod")]
         public IActionResult GetContactMethodTypes()

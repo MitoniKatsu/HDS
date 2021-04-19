@@ -17,13 +17,18 @@ namespace HDS.Domain.DTOs
         public int ServiceID { get; set; }
 
     }
+    public class ServiceVerboseDto : ServiceDto
+    {
+        public int OrderID { get; set; }
+
+    }
 
     public class CreateServiceDto : BaseServiceDto
     {
 
     }
 
-    public class UpdateServiceDto : BaseServiceDto
+    public class UpdateServiceDto : ServiceDto
     {
         public int OrderID { get; set; }
     }

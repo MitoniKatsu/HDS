@@ -486,6 +486,155 @@ namespace HDS.Domain.Utility
             }
         }
         #endregion
+        #region Order
+        public static void ValidateData(this IHDSContext context, CreateOrderDto dto)
+        {
+            var errors = new StringBuilder();
+            // CustomerID
+            errors.AddIfExists(dto.CustomerID.ValidateRequired(ValidationMessages.CustomerIDRequired));
+            errors.AddIfExists(context.KeyExists<Customer>(dto.CustomerID, ValidationMessages.CustomerIDNotFound));
+            // Employee
+            errors.AddIfExists(dto.EmployeeID.ValidateRequired(ValidationMessages.EmployeeIDRequired));
+            errors.AddIfExists(context.KeyExists<Employee>(dto.EmployeeID, ValidationMessages.EmployeeIDNotFound));
+
+            if (dto.Services != null && dto.Services.Any())
+            {
+                // Services
+                for (int i = 0; i < dto.Services.Count; i++)
+                {
+                    // ServiceDate
+                    errors.AddIfExists(dto.Services[i].ServiceDate.ValidateFutureDate($"Service [{i}]:{ValidationMessages.ServiceDateValid}"));
+                    // ServiceDescription
+                    errors.AddIfExists(dto.Services[i].ServiceDescription.ValidateRequired($"Service [{i}]:{ValidationMessages.ServiceDescriptionRequired}"));
+                    errors.AddIfExists(dto.Services[i].ServiceDescription.ValidateLength(400, $"Service [{i}]:{ValidationMessages.ServiceDescriptionLength}"));
+                    // Price
+                    errors.AddIfExists(dto.Services[i].Price.ValidatePositiveDecimal($"Service [{i}]:{ValidationMessages.PriceRequired}"));
+                }
+            }
+            if (dto.OrderDetails != null && dto.OrderDetails.Any())
+            {
+                // OrderDetails
+                for (int i = 0; i < dto.OrderDetails.Count; i++)
+                {
+                    // ProductID
+                    errors.AddIfExists(dto.OrderDetails[i].ProductID.ValidateRequired($"Order Detail [{i}]:{ValidationMessages.ProductIDRequired}"));
+                    errors.AddIfExists(context.KeyExists<Inventory>(dto.OrderDetails[i].ProductID, $"Order Detail [{i}]:{ValidationMessages.ProductIDNotFound}"));
+                    // Quoted Price
+                    errors.AddIfExists(dto.OrderDetails[i].QuotedPrice.ValidatePositiveDecimal($"Order Detail [{i}]:{ValidationMessages.PriceRequired}"));
+                    // Quantity
+                    errors.AddIfExists(dto.OrderDetails[i].Quantity.ValidateRequired($"Order Detail [{i}]:{ValidationMessages.QuantityRequired}"));
+                    errors.AddIfExists(dto.OrderDetails[i].Quantity.ValidatePositiveInt($"Order Detail [{i}]:{ValidationMessages.QuantityValid}"));
+                }
+            }
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+
+        public static void ValidateData(this IHDSContext context, OrderDto dto)
+        {
+            var errors = new StringBuilder();
+            // OrderID
+            errors.AddIfExists(dto.OrderID.ValidateRequired(ValidationMessages.OrderIDRequired));
+            errors.AddIfExists(context.KeyExists<Customer>(dto.OrderID, ValidationMessages.OrderIDNotFound));
+            // CustomerID
+            errors.AddIfExists(dto.CustomerID.ValidateRequired(ValidationMessages.CustomerIDRequired));
+            errors.AddIfExists(context.KeyExists<Customer>(dto.CustomerID, ValidationMessages.CustomerIDNotFound));
+            // Employee
+            errors.AddIfExists(dto.EmployeeID.ValidateRequired(ValidationMessages.EmployeeIDRequired));
+            errors.AddIfExists(context.KeyExists<Employee>(dto.EmployeeID, ValidationMessages.EmployeeIDNotFound));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        #endregion
+        #region OrderDetails
+        public static void ValidateData(this IHDSContext context, CreateOrderDetailDto dto)
+        {
+            var errors = new StringBuilder();
+            // ProductID
+            errors.AddIfExists(dto.ProductID.ValidateRequired(ValidationMessages.ProductIDRequired));
+            errors.AddIfExists(context.KeyExists<Inventory>(dto.ProductID, ValidationMessages.ProductIDNotFound));
+            // Quoted Price
+            errors.AddIfExists(dto.QuotedPrice.ValidatePositiveDecimal(ValidationMessages.PriceRequired));
+            // Quantity
+            errors.AddIfExists(dto.Quantity.ValidateRequired(ValidationMessages.QuantityRequired));
+            errors.AddIfExists(dto.Quantity.ValidatePositiveInt(ValidationMessages.QuantityValid));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        public static void ValidateData(this IHDSContext context, UpdateOrderDetailDto dto)
+        {
+            var errors = new StringBuilder();
+            // OrderDetailID
+            errors.AddIfExists(dto.OrderDetailID.ValidateRequired(ValidationMessages.OrderDetailIDRequired));
+            errors.AddIfExists(context.KeyExists<OrderDetail>(dto.OrderDetailID, ValidationMessages.OrderDetailIDNotFound));
+            // OrderID
+            errors.AddIfExists(dto.OrderID.ValidateRequired(ValidationMessages.OrderIDRequired));
+            errors.AddIfExists(context.KeyExists<Order>(dto.OrderID, ValidationMessages.OrderIDNotFound));
+            // ProductID
+            errors.AddIfExists(dto.ProductID.ValidateRequired(ValidationMessages.ProductIDRequired));
+            errors.AddIfExists(context.KeyExists<Inventory>(dto.ProductID, ValidationMessages.ProductIDNotFound));
+            // Quoted Price
+            errors.AddIfExists(dto.QuotedPrice.ValidatePositiveDecimal(ValidationMessages.PriceRequired));
+            // Quantity
+            errors.AddIfExists(dto.Quantity.ValidateRequired(ValidationMessages.QuantityRequired));
+            errors.AddIfExists(dto.Quantity.ValidatePositiveInt(ValidationMessages.QuantityValid));
+
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        #endregion
+        #region Service
+        public static void ValidateData(this CreateServiceDto dto)
+        {
+            var errors = new StringBuilder();
+            // ServiceDate
+            errors.AddIfExists(dto.ServiceDate.ValidateFutureDate(ValidationMessages.ServiceDateValid));
+            // ServiceDescription
+            errors.AddIfExists(dto.ServiceDescription.ValidateRequired(ValidationMessages.ServiceDescriptionRequired));
+            errors.AddIfExists(dto.ServiceDescription.ValidateLength(400, ValidationMessages.ServiceDescriptionLength));
+            // Price
+            errors.AddIfExists(dto.Price.ValidatePositiveDecimal(ValidationMessages.PriceRequired));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        public static void ValidateData(this IHDSContext context, UpdateServiceDto dto)
+        {
+            var errors = new StringBuilder();
+            // ServiceID
+            errors.AddIfExists(dto.ServiceID.ValidateRequired(ValidationMessages.ServiceIDRequired));
+            errors.AddIfExists(context.KeyExists<Service>(dto.ServiceID, ValidationMessages.ServiceIDNotFound));
+            // OrderID
+            errors.AddIfExists(dto.OrderID.ValidateRequired(ValidationMessages.OrderIDRequired));
+            errors.AddIfExists(context.KeyExists<Order>(dto.OrderID, ValidationMessages.OrderIDNotFound));
+            // ServiceDate
+            errors.AddIfExists(dto.ServiceDate.ValidateFutureDate(ValidationMessages.ServiceDateValid));
+            // ServiceDescription
+            errors.AddIfExists(dto.ServiceDescription.ValidateRequired(ValidationMessages.ServiceDescriptionRequired));
+            errors.AddIfExists(dto.ServiceDescription.ValidateLength(400, ValidationMessages.ServiceDescriptionLength));
+            // Price
+            errors.AddIfExists(dto.Price.ValidatePositiveDecimal(ValidationMessages.PriceRequired));
+
+            if (errors.Length > 0)
+            {
+                throw new ValidationException(errors.ToString());
+            }
+        }
+        #endregion
         #region Store
         public static void ValidateData(this IHDSContext context, CreateStoreDto dto)
         {
@@ -623,6 +772,7 @@ namespace HDS.Domain.Utility
                 }
             }
         }
+
         public static string ValidateRequired(this string property, string message)
         {
             if (string.IsNullOrEmpty(property))
@@ -654,6 +804,25 @@ namespace HDS.Domain.Utility
         public static string ValidatePositiveInt(this int property, string message)
         {
             if (property <= 0)
+            {
+                return message;
+            }
+            return null;
+        }
+
+        public static string ValidatePositiveDecimal(this decimal property, string message)
+        {
+            if (property <= 0)
+            {
+                return message;
+            }
+            return null;
+        }
+
+        public static string ValidateFutureDate(this DateTime property, string message)
+        {
+            var now = DateTime.UtcNow;
+            if (property > now)
             {
                 return message;
             }

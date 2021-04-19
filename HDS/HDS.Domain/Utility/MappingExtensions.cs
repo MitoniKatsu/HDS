@@ -76,6 +76,21 @@ namespace HDS.Domain.Utility
                 cfg.CreateMap<Inventory, InventoryVerboseDto>();
                 cfg.CreateMap<Inventory, InventoryDto>();
                 #endregion
+                #region Order
+                cfg.CreateMap<CreateOrderDto, Order>();
+                cfg.CreateMap<Order, OrderDto>();
+                cfg.CreateMap<Order, OrderVerboseDto>();
+                #endregion
+                #region OrderDetail
+                cfg.CreateMap<CreateOrderDetailDto, OrderDetail>();
+                cfg.CreateMap<OrderDetail, OrderDetailDto>();
+                cfg.CreateMap<OrderDetail, OrderDetailVerboseDto>();
+                #endregion
+                #region Service
+                cfg.CreateMap<CreateServiceDto, Service>();
+                cfg.CreateMap<Service, ServiceDto>();
+                cfg.CreateMap<Service, ServiceVerboseDto>();
+                #endregion
                 #region Store
                 cfg.CreateMap<CreateStoreDto, Store>();
                 cfg.CreateMap<Store, BaseStoreDto>();
@@ -303,6 +318,78 @@ namespace HDS.Domain.Utility
             entity.LocationID = dto.LocationID;
             entity.SerialNumber = dto.SerialNumber;
             entity.Cost = dto.Cost;
+            entity.Price = dto.Price;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region Order
+        public static Order ToEntity(this CreateOrderDto dto)
+        {
+            Init();
+            return Mapper.Map<Order>(dto);
+        }
+        public static OrderDto ToDto(this Order entity)
+        {
+            Init();
+            return Mapper.Map<OrderDto>(entity);
+        }
+        public static OrderVerboseDto ToVerboseDto(this Order entity)
+        {
+            Init();
+            return Mapper.Map<OrderVerboseDto>(entity);
+        }
+        public static void Merge(this Order entity, OrderDto dto)
+        {
+            entity.CustomerID = dto.CustomerID;
+            entity.EmployeeID = dto.EmployeeID;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region OrderDetail
+        public static OrderDetail ToEntity(this CreateOrderDetailDto dto)
+        {
+            Init();
+            return Mapper.Map<OrderDetail>(dto);
+        }
+        public static OrderDetailDto ToDto(this OrderDetail entity)
+        {
+            Init();
+            return Mapper.Map<OrderDetailDto>(entity);
+        }
+        public static OrderDetailVerboseDto ToVerboseDto(this OrderDetail entity)
+        {
+            Init();
+            return Mapper.Map<OrderDetailVerboseDto>(entity);
+        }
+        public static void Merge(this OrderDetail entity, UpdateOrderDetailDto dto)
+        {
+            entity.ProductID = dto.ProductID;
+            entity.QuotedPrice = dto.QuotedPrice;
+            entity.Quantity = dto.Quantity;
+            entity.QuoteNumber = dto.QuoteNumber;
+            entity.Updated = DateTime.UtcNow;
+        }
+        #endregion
+        #region Service
+        public static Service ToEntity(this CreateServiceDto dto)
+        {
+            Init();
+            return Mapper.Map<Service>(dto);
+        }
+        public static ServiceDto ToDto(this Service entity)
+        {
+            Init();
+            return Mapper.Map<ServiceDto>(entity);
+        }
+        public static ServiceVerboseDto ToVerboseDto(this Service entity)
+        {
+            Init();
+            return Mapper.Map<ServiceVerboseDto>(entity);
+        }
+        public static void Merge(this Service entity, UpdateServiceDto dto)
+        {
+            entity.ServiceDescription = dto.ServiceDescription;
+            entity.ServiceDate = dto.ServiceDate;
             entity.Price = dto.Price;
             entity.Updated = DateTime.UtcNow;
         }

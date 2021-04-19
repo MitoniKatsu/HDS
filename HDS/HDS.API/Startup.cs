@@ -1,20 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using HDS.Data;
 using HDS.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace HDS.API
@@ -50,6 +44,9 @@ namespace HDS.API
             services.AddTransient<EmployeeRepository>();
             services.AddTransient<EntityAddressRepository>();
             services.AddTransient<InventoryRepository>();
+            services.AddTransient<OrderDetailRepository>();
+            services.AddTransient<OrderRepository>();
+            services.AddTransient<ServiceRepository>();
             services.AddTransient<StoreRepository>();
             services.AddTransient<StoreRoleRepository>();
             services.AddTransient<TypesRepository>();

@@ -6,23 +6,32 @@ using System.Threading.Tasks;
 
 namespace HDS.Domain.DTOs
 {
-    public class OrderDetailDto
+    public class BaseOrderDetailDto
     {
-        public int OrderDetailID { get; set; }
-        public int OrderID { get; set; }
         public int ProductID { get; set; }
         public decimal QuotedPrice { get; set; }
         public int Quantity { get; set; }
         public int QuoteNumber { get; set; }
     }
+    public class OrderDetailDto : BaseOrderDetailDto
+    {
+        public int OrderDetailID { get; set; }
+        
+    }
 
-    public class CustomerQueryOrderDetailsDto : OrderDetailDto
+    public class OrderDetailVerboseDto : OrderDetailDto
+    {
+        public int OrderID { get; set; }
+
+    }
+
+    public class CreateOrderDetailDto : BaseOrderDetailDto
     {
 
     }
 
-    public class OrderQueryOrderDetailsDto : OrderDetailDto
+    public class UpdateOrderDetailDto : OrderDetailDto
     {
-        public InventoryDto Product { get; set; }
+        public int OrderID { get; set; }
     }
 }

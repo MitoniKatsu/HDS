@@ -27,7 +27,7 @@ namespace HDS.Domain.Utility
         public const string ContactMethodTypeNameRequired = "ContactMethodTypeName is required";
         public const string ContactMethodValueLength = "ContactMethodValue has a max length of 100";
         public const string ContactMethodValueRequired = "ContactMethodValue is required";
-        public const string CostRequired = "Cost is required";
+        public const string CostRequired = "Cost must be a decimal greater than 0";
         public const string CustomerIDNotFound = "CustomerID not found";
         public const string CustomerIDRequired = "CustomerID is required";
         public const string EmployeeIDNotFound = "EmployeeID not found";
@@ -44,8 +44,6 @@ namespace HDS.Domain.Utility
         public const string LastNameRequired = "LastName is required";
         public const string ModelLength = "Model has a max length of 100";
         public const string ModelRequired = "Model is required";
-        public const string OrderDateRequired = "OrderDate is required";
-        public const string OrderDateValid = "OrderDate must be a valid datetime";
         public const string OrderDetailIDNotFound = "OrderDetailID not found";
         public const string OrderDetailIDRequired = "OrderDetailID is required";
         public const string OrderIDNotFound = "OrderID not found";
@@ -54,7 +52,7 @@ namespace HDS.Domain.Utility
         public const string PositionIDRequired = "PositionID is required";
         public const string PostalCodeLength = "PostalCode has a max length of 10";
         public const string PostalCodeRequired = "PostalCode is required";
-        public const string PriceRequired = "Price is required";
+        public const string PriceRequired = "Price must be a decimal greater than 0";
         public const string PrimaryAddressSingle = "Only one address can be set to primary at a time";
         public const string ProductDeleteDenied = "Unable to delete an inventory item that exists in an order";
         public const string ProductDescriptionLength = "ProductDescription has a max length of 1000";
@@ -66,8 +64,7 @@ namespace HDS.Domain.Utility
         public const string RoleDescriptionLength = "RoleDescription has a max length of 400";
         public const string RoleDescriptionRequired = "RoleDescription is required";
         public const string SerialNumberLength = "SerialNumber has a max length of 100";
-        public const string ServiceDateRequired = "ServiceDate is required";
-        public const string ServiceDateValid = "ServiceDate must be a valid datetime";
+        public const string ServiceDateValid = "ServiceDate must be a valid future datetime";
         public const string ServiceDeleteDenied = "Unable to delete an service that exists in an order";
         public const string ServiceDescriptionLength = "ServiceDescription has a max length of 400";
         public const string ServiceDescriptionRequired = "ServiceDescription is required";
