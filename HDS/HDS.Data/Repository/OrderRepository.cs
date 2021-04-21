@@ -23,6 +23,7 @@ namespace HDS.Data.Repository
         {
             _dbContext.ValidateData(newOrder);
             var order = newOrder.ToEntity();
+            order.OrderDate = DateTime.UtcNow;
             _dbContext.Order.Add(order);
             _dbContext.SaveChanges();
 
