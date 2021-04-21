@@ -822,7 +822,7 @@ namespace HDS.Domain.Utility
         public static string ValidateFutureDate(this DateTime property, string message)
         {
             var now = DateTime.UtcNow;
-            if (property > now)
+            if (property < now)
             {
                 return message;
             }
