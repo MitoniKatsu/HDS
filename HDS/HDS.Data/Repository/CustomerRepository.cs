@@ -40,6 +40,10 @@ namespace HDS.Data.Repository
                 .ThenInclude(o => o.AddressType)
                 .Include(o => o.ContactMethods)
                 .ThenInclude(o => o.ContactMethodType)
+                .Include(o => o.Orders)
+                .ThenInclude(o => o.OrderDetails)
+                .Include(o => o.Orders)
+                .ThenInclude(o => o.Services)
                 .Where(o => o.CustomerID == customerID)
                 .SingleOrDefault().ToVerboseDto();
         }
