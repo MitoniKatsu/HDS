@@ -1,2 +1,2 @@
 # HDS
-Home Design Solutions API
+Home Design Solutions API (school project)
